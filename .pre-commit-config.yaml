@@ -1,0 +1,30 @@
+# Pre-commit hooks for Terraform
+# Automatically runs before git commits to ensure code quality and security
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.88.4
+    hooks:
+      # Format Terraform files
+      - id: terraform_fmt
+        name: Terraform fmt
+        description: Rewrites all Terraform configuration files to a canonical format
+        
+      # Validate Terraform configuration
+      - id: terraform_validate
+        name: Terraform validate
+        description: Validates all Terraform configuration files
+        
+      # Lint Terraform files with tflint
+      - id: terraform_tflint
+        name: Terraform tflint
+        description: Lints Terraform files with tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+        
+      # Security scan with tfsec
+      - id: terraform_tfsec
+        name: Terraform tfsec
+        description: Static analysis of Terraform templates to spot potential security issues

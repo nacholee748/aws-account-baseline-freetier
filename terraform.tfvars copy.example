@@ -1,0 +1,43 @@
+# Example Terraform Variables
+# Copy this file to terraform.tfvars and update with your actual values
+# DO NOT commit terraform.tfvars to version control (add to .gitignore)
+
+# AWS Configuration
+aws_region = "us-east-1"
+account_id = "123456789012"  # Replace with your 12-digit AWS account ID
+
+# Project Configuration
+project_name = "aws-security-setup"
+environment  = "production"
+
+# Email Notifications
+# Budget alerts will be sent to these addresses
+budget_alert_emails = [
+  "admin@example.com",
+  "finance@example.com"
+]
+
+# Security alerts will be sent to these addresses
+security_alert_emails = [
+  "security@example.com",
+  "admin@example.com"
+]
+
+# CloudTrail Configuration
+# Number of days to retain CloudTrail logs in S3 (30-365 days)
+cloudtrail_log_retention_days = 90
+
+# IAM Identity Center Configuration
+# Enforce MFA for all IAM Identity Center users
+enable_mfa_enforcement = true
+
+# Resource Tags
+# These tags will be applied to all resources
+tags = {
+  ManagedBy   = "Terraform"
+  Project     = "AWS-Security-Setup"
+  Environment = "Production"
+  Owner       = "admin@example.com"
+  CostCenter  = "Infrastructure"
+  Compliance  = "SecurityBaseline"
+}

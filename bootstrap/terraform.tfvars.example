@@ -1,0 +1,17 @@
+# Example Terraform Variables for Bootstrap Module
+# Copy this file to terraform.tfvars and update with your values
+
+# AWS Account ID (12-digit number)
+account_id = "123456789012"
+
+# AWS Region for resources
+aws_region = "us-east-1"
+
+# Common tags for all resources
+tags = {
+  ManagedBy   = "Terraform"
+  Project     = "AWS-Security-Setup"
+  Environment = "Production"
+  Owner       = "your-email@example.com"
+  CostCenter  = "Infrastructure"
+}

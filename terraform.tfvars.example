@@ -1,0 +1,25 @@
+# AWS Account Configuration
+aws_region = "us-east-1"
+account_id = "123456789012"  # Replace with your AWS account ID
+
+# Project Configuration
+project_name = "aws-baseline-pdn"
+environment  = "production"
+
+# Email Notifications
+budget_alert_emails   = ["your-email@example.com"]
+security_alert_emails = ["your-email@example.com"]
+
+# CloudTrail Configuration
+cloudtrail_log_retention_days = 90
+
+# IAM Identity Center
+enable_mfa_enforcement = true
+
+# Resource Tags
+tags = {
+  ManagedBy   = "Terraform"
+  Project     = "baseline-pdn"
+  Environment = "pdn"
+  Owner       = "your-email@example.com"
+}
