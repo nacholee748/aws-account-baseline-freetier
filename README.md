@@ -1,4 +1,9 @@
-# AWS Account Security Setup
+# AWS Account Baseline - Free Tier
+
+[![Terraform](https://img.shields.io/badge/Terraform-1.6+-623CE4?logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Free%20Tier-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/free/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 Configuración automatizada de seguridad para cuentas AWS nuevas utilizando Terraform e Infrastructure as Code, con **$0 de costo** usando exclusivamente servicios del Free Tier.
 
