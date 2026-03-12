@@ -7,6 +7,80 @@
 
 Configuración automatizada de seguridad para cuentas AWS nuevas utilizando Terraform e Infrastructure as Code, con **$0 de costo** usando exclusivamente servicios del Free Tier.
 
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart TB
+    subgraph IDENTITY["🔐 Identity & Access"]
+        ROOT["👤 Root Account<br/>+ MFA"]
+        IDC["🎫 IAM Identity Center"]
+        PS1["🛡️ Admin<br/>Permission Set"]
+        PS2["👨‍💻 Developer<br/>Permission Set"]
+        PS3["👁️ ReadOnly<br/>Permission Set"]
+    end
+
+    subgraph AUDIT["📋 Audit & Logging"]
+        CT["📝 CloudTrail<br/>Multi-Region"]
+        S3LOGS["🪣 S3 Bucket<br/>CloudTrail Logs"]
+    end
+
+    subgraph COST["💰 Cost Control"]
+        BUDGET["📊 AWS Budgets<br/>$0.01 limit"]
+        ALERT1["⚠️ Alert $1"]
+        ALERT5["🚨 Alert $5"]
+        FREETIER["📈 Free Tier<br/>Monitor 80%"]
+    end
+
+    subgraph NOTIFY["📧 Notifications"]
+        SNSSEC["🔔 SNS<br/>Security Alerts"]
+        SNSBUDGET["🔔 SNS<br/>Budget Alerts"]
+        EMAIL["📬 Email"]
+    end
+
+    subgraph SECURITY["🛡️ Security Policies"]
+        S3BLOCK["🚫 S3 Block<br/>Public Access"]
+        PASSW["🔑 IAM Password<br/>Policy 14+ chars"]
+        IMDS["🖥️ EC2 IMDSv2<br/>Enforcement"]
+    end
+
+    subgraph TERRAFORM["⚙️ Terraform Backend"]
+        S3STATE["🪣 S3 State"]
+        DDB["🗄️ DynamoDB<br/>State Lock"]
+    end
+
+    ROOT -.->|logs| CT
+    IDC --> PS1 & PS2 & PS3
+    CT --> S3LOGS
+    
+    BUDGET --> ALERT1 & ALERT5 & FREETIER
+    ALERT1 & ALERT5 & FREETIER --> SNSBUDGET
+    CT -.->|root usage| SNSSEC
+    
+    SNSSEC & SNSBUDGET --> EMAIL
+    S3STATE <--> DDB
+
+    style ROOT fill:#ff6b6b,color:#fff
+    style IDC fill:#4ecdc4,color:#fff
+    style CT fill:#95e1d3,color:#000
+    style BUDGET fill:#ffd93d,color:#000
+    style SNSSEC fill:#ff6b6b,color:#fff
+    style SNSBUDGET fill:#ffd93d,color:#000
+    style S3STATE fill:#a8e6cf,color:#000
+```
+
+### 🎯 ¿Qué incluye?
+
+| Componente | Servicio AWS | Costo |
+|------------|--------------|-------|
+| 🔐 Gestión de Accesos | IAM Identity Center (SSO) | ✅ Gratis |
+| 📝 Auditoría | CloudTrail (1 trail) | ✅ Gratis |
+| 💰 Control de Costos | AWS Budgets (2 budgets) | ✅ Gratis |
+| 📧 Notificaciones | SNS (1000 emails/mes) | ✅ Gratis |
+| 🪣 Almacenamiento | S3 (5GB) | ✅ Gratis |
+| 🗄️ State Locking | DynamoDB (25GB) | ✅ Gratis |
+
+---
+
 ## Objetivos del Proyecto
 
 Este proyecto tiene como objetivos principales:
